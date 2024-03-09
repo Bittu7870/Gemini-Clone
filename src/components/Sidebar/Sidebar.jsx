@@ -12,7 +12,9 @@ const Sidebar = () => {
     const getLocation = async () => {
       try {
         const res = await fetch(
-          `https://extreme-ip-lookup.com/json/?key=mug5DAJbj2Ww2CYeRBby`
+          `https://extreme-ip-lookup.com/json/?key=${
+            import.meta.env.VITE_API_KEY
+          }`
         );
         const result = await res.json();
         setLocation(result);
