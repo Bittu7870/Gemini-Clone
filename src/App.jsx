@@ -1,11 +1,12 @@
-import './App.css'
+import "./App.css";
+import Sidebar from "./components/Sidebar/Sidebar";
 
 const App = () => {
   return (
     <div>
-      Gemini Clone
+      <Sidebar />
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
