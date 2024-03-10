@@ -1,10 +1,12 @@
 import "./App.css";
+import Main from "./components/Main/Main";
 import Sidebar from "./components/Sidebar/Sidebar";
 
 const App = () => {
   return (
-    <div>
+    <div className="flex">
       <Sidebar />
+      <Main />
     </div>
   );
 };
