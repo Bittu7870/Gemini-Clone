@@ -33,7 +33,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="inline-flex flex-col justify-between bg-[#f0f4f9] min-h-[100vh] px-2 py-5 font-Outfit">
+    <div className="hidden sm:inline-flex flex-col justify-between bg-[#f0f4f9] min-h-[100vh] px-2 py-5 font-Outfit">
       {/* top menu */}
       <div className="">
         <img
