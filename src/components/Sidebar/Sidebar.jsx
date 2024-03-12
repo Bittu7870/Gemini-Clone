@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { assets } from "../../assets/assets.js";
+import { Context } from "../../context/Context.jsx";
 
 const Sidebar = () => {
+  const { onSent, prevPrompt, setRecentPrompt, newChat } = useContext(Context);
   const [extend, setExtend] = useState(true);
   const [location, setLocation] = useState("Delhi");
   const handleExtend = () => {
@@ -25,6 +27,11 @@ const Sidebar = () => {
     getLocation();
   }, []);
 
+  const loadPrompt = async (prompt) => {
+    setRecentPrompt(prompt);
+    await onSent(prompt);
+  };
+
   return (
     <div className="inline-flex flex-col justify-between bg-[#f0f4f9] min-h-[100vh] px-2 py-5 font-Outfit">
       {/* top menu */}
@@ -35,21 +42,30 @@ const Sidebar = () => {
           alt="menu-icon"
           onClick={handleExtend}
         />
-        <div className="inline-flex items-center gap-3 rounded-full bg-[#e6eaf1] text-gray-600 mt-14 text-xl cursor-pointer px-4 py-2">
+        <div
+          className="inline-flex items-center gap-3 rounded-full bg-[#e6eaf1] text-gray-600 mt-14 text-xl cursor-pointer px-4 py-2"
+          onClick={newChat}
+        >
           <img className="w-5" src={assets.plus_icon} alt="plus-icon" />
           {extend ? <p>New chat</p> : null}
         </div>
         {extend ? (
           <div className="flex flex-col">
             <p className="mt-7 mb-5">Recent</p>
-            <div className="flex gap-2 text-[#282828] items-start  truncate p-[10px] pr-10 rounded-full cursor-pointer hover:bg-[#e2e6eb] ">
-              <img
-                className="w-5"
-                src={assets.message_icon}
-                alt="message-icon"
-              />
-              <p>What is recent ...</p>
-            </div>
+            {prevPrompt.map((item, index) => (
+              <div
+                key={index}
+                className="flex gap-2 text-[#282828] items-start p-[10px] pr-10 rounded-full cursor-pointer hover:bg-[#e2e6eb] "
+                onClick={() => loadPrompt(item)}
+              >
+                <img
+                  className="w-5"
+                  src={assets.message_icon}
+                  alt="message-icon"
+                />
+                <p className="truncate max-w-36">{item}...</p>
+              </div>
+            ))}
           </div>
         ) : null}
       </div>
